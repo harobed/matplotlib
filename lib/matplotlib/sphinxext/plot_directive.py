@@ -672,7 +672,7 @@ def run(arguments, content, options, state_machine, state, lineno):
         output_base = os.path.basename(source_file_name)
     else:
         source_file_name = rst_file
-        code = textwrap.dedent("\n".join(map(str, content)))
+        code = textwrap.dedent("\n".join(map(unicode, content)))
         counter = document.attributes.get('_plot_counter', 0) + 1
         document.attributes['_plot_counter'] = counter
         base, ext = os.path.splitext(os.path.basename(source_file_name))
@@ -814,6 +814,6 @@ def run(arguments, content, options, state_machine, state, lineno):
             code_escaped = unescape_doctest(code)
         else:
             code_escaped = code
-        f.write(code_escaped)
+        f.write(code_escaped.encode('utf8'))
 
     return errors
